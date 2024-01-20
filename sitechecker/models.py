@@ -23,6 +23,6 @@ class Check(models.Model):
     current status of your site you've got.
     """
 
-    site = models.ForeignKey(User, on_delete=models.CASCADE)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
     response_code = models.CharField(max_length=10)
     time = models.DateTimeField(auto_now_add=True)

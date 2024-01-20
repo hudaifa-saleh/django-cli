@@ -3,10 +3,10 @@ Perform an HTTP HEAD request and see if the site is up and return 200_OK message
 """
 from datetime import datetime
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 import requests
 
-from sitechecker.models import Site
+from sitechecker.models import Site, Check
 
 
 def get_url_list():
@@ -28,5 +28,14 @@ class Command(BaseCommand):
             self.stdout.write("Response: %s - %s" % (response.status_code, site.url))
             site.last_response_code = str(response.status_code)
             site.last_response_checked = datetime.now()
-            site.save()
+            try:
+                site.save()
+            except Exception as e:
+                self.stdout.write(self.style.ERROR("Error updating check: %s - %s" % (e, site)))
+
+            try:
+                new_check_entry = Check(site=site, response_code=str(response.status_code))
+                new_check_entry.save()
+            except Exception as e:
+                self.stdout.write(self.style.ERROR("Error Adding check: %s - %s" % (e, new_check_entry)))
             # Update database record to store the last response & timestamp.
