@@ -25,6 +25,7 @@ class Command(BaseCommand):
             response = requests.head(site.url)
             # TODO: Follow redirects
             # TODO: Multi threads
+            # TODO: tie a site to a user
             self.stdout.write("Response For -->  %s - %s" % (response.status_code, site.url))
             site.last_response_code = str(response.status_code)
             site.last_response_checked = timezone.now()
