@@ -21,5 +21,5 @@ class Command(BaseCommand):
         for site in get_url_list():
             response = requests.head(site.url)
             # TODO: Follow redirects
-            self.stdout.write("Response: %s" % response.status_code)
+            self.stdout.write("Response: %s - %s" % (response.status_code, site.url))
             # Update database record to store the last response & timestamp.

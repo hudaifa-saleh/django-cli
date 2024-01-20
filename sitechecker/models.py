@@ -4,7 +4,7 @@ from django.db import models
 
 class Site(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    site = models.CharField(max_length=250)
+    url = models.CharField(max_length=250)
     description = models.TextField(max_length=250)
     last_response_code = models.CharField(max_length=10, null=True, blank=True)
     last_response_checked = models.DateTimeField(null=True, blank=True)

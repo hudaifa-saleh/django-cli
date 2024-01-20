@@ -7,6 +7,6 @@ from sitechecker.models import Site
 class SiteAdmin(admin.ModelAdmin):
     list_display = (
         "user",
-        "site",
+        "url",
         "last_response_code",
     )
