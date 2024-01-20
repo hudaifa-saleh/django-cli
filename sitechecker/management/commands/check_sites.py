@@ -5,6 +5,7 @@ from datetime import datetime
 
 from django.core.management.base import BaseCommand
 import requests
+from django.utils import timezone
 
 from sitechecker.models import Site, Check
 
@@ -27,7 +28,7 @@ class Command(BaseCommand):
             # TODO: fix time
             self.stdout.write("Response: %s - %s" % (response.status_code, site.url))
             site.last_response_code = str(response.status_code)
-            site.last_response_checked = datetime.now()
+            site.last_response_checked = timezone.now()
             try:
                 site.save()
             except Exception as e:
