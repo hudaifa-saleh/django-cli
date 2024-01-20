@@ -5,6 +5,7 @@ from django.db import models
 class Site(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     site = models.CharField(max_length=250)
+    description = models.TextField(max_length=250)
     last_response_code = models.CharField(max_length=10)
     last_response_checked = models.DateTimeField()
 
