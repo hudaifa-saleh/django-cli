@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
         # perform http request
         for site in get_url_list():
-            response = requests.head(site.url)
+            response = requests.head(site.url, allow_redirects=True)
             # TODO: Follow redirects
             # TODO: Multi threads
             # TODO: tie a site to a user
