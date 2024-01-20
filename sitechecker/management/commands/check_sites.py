@@ -25,8 +25,7 @@ class Command(BaseCommand):
             response = requests.head(site.url)
             # TODO: Follow redirects
             # TODO: Multi threads
-            # TODO: fix time
-            self.stdout.write("Response: %s - %s" % (response.status_code, site.url))
+            self.stdout.write("Response For -->  %s - %s" % (response.status_code, site.url))
             site.last_response_code = str(response.status_code)
             site.last_response_checked = timezone.now()
             try:
