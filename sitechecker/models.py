@@ -10,7 +10,7 @@ class Site(models.Model):
     last_response_checked = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return str(f"{self.user} / {self.site}")
+        return str(f"{self.user} / {self.url}")
 
 
 class Check(models.Model):
