@@ -1,19 +1,16 @@
 """
 Perform an HTTP HEAD request and see if the site is up and return 200_OK message.
 """
-from django.core.management.base import BaseCommand
+
+from concurrent.futures import ThreadPoolExecutor
+
 import requests
+from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-from sitechecker.models import Site, Check
-
-
-def get_url_list():
-    return Site.objects.all()
-
-
-def site_check(site):
-    pass
+from project import settings
+from sitechecker.func import get_url_list
+from sitechecker.models import Check
 
 
 class Command(BaseCommand):
@@ -22,7 +19,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write("[*] Check all sites...")
 
-        with ThreadPoolExecutor(max_workers=24) as executor:
+        with ThreadPoolExecutor(max_workers=settings.MAX_SITE_CHECKER_THREADS) as executor:
             future = executor.submit(pow, 323, 1235)
             print(future.result())
 
